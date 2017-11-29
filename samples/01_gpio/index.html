@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>LED Control Sample</title>
+    </head>
+    <body>
+        <!--LED制御用のボタン-->
+        <input type="button" value="ON" onClick="button('ON')"> <br>
+        <input type="button" value="OFF" onClick="button('OFF')"> <br>
+
+        <script type="text/javascript">
+            // ボタンが押された時に呼び出されるスクリプト
+            function button(value) {
+                // 使用するブラウザによってリクエストの投げ方を変更
+                request = new XMLHttpRequest();
+
+                // ポストメッセージを送信
+                var send = 'code=' + value;
+                request.open('POST','/serial',true);
+                request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                request.setRequestHeader('Content-Length', send.length);
+                request.setRequestHeader('Connection', 'close');
+                request.send(send);
+            }
+        </script>
+    </body>
+</html>
